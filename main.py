@@ -110,11 +110,17 @@ if model is None:
     st.error(f"❌ Không tìm thấy file `{MODEL_PATH}`. Hãy copy file model vào cùng thư mục với `app.py`!")
     st.stop()
 
-# Tạo 2 Tabs: Đăng ký và Xác thực
-tab1, tab2 = st.tabs(["📝 ĐĂNG KÝ CHỮ KÝ", "🔍 XÁC THỰC CHỮ KÝ"])
+# Dùng Sidebar menu thay vì Tabs (tránh bug canvas không render ở tab thứ 2)
+st.sidebar.title("📋 Menu")
+page = st.sidebar.radio("Chọn chức năng:", ["📝 Đăng ký chữ ký", "🔍 Xác thực chữ ký"])
+st.sidebar.divider()
+st.sidebar.markdown(f"**Người dùng đã đăng ký:** {len(st.session_state['database'])}")
+if st.session_state['database']:
+    for name in st.session_state['database']:
+        st.sidebar.write(f"• {name}")
 
-# --- TAB 1: ĐĂNG KÝ ---
-with tab1:
+# ==================== TRANG ĐĂNG KÝ ====================
+if page == "📝 Đăng ký chữ ký":
     st.header("Bước 1: Đăng ký chữ ký mẫu")
     user_id = st.text_input("Nhập tên của bạn (VD: nguyen_van_a):", key="enroll_id")
 
@@ -150,12 +156,12 @@ with tab1:
         else:
             st.warning("Vui lòng vẽ hoặc upload ảnh chữ ký trước!")
 
-# --- TAB 2: XÁC THỰC ---
-with tab2:
+# ==================== TRANG XÁC THỰC ====================
+elif page == "🔍 Xác thực chữ ký":
     st.header("Bước 2: Kiểm tra chữ ký")
 
     if not st.session_state['database']:
-        st.info("Chưa có ai đăng ký. Vui lòng sang tab Đăng ký trước!")
+        st.info("Chưa có ai đăng ký. Vui lòng chọn 'Đăng ký chữ ký' ở menu bên trái trước!")
     else:
         user_list = list(st.session_state['database'].keys())
         selected_user = st.selectbox("Chọn người dùng để xác thực:", user_list)
