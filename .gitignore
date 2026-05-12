@@ -1,0 +1,27 @@
+# ==============================================================================
+# BỎ QUA CÁC FILE NHẠY CẢM VÀ MÔI TRƯỜNG KHI ĐẨY LÊN GITHUB
+# ==============================================================================
+
+# 1. Các file biến môi trường và thiết lập máy chủ
+.env
+firebase_credentials.json
+
+# 2. Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# 3. Virtual Environment (Nếu có)
+venv/
+env/
+.venv/
+
+# 4. Trọng số mô hình AI (Rất nặng, không nên push)
+*.pth
+*.pt
+
+# 5. Các file log, db cục bộ
+*.log
+database.json
+saved_signatures/
