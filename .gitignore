@@ -18,7 +18,6 @@ env/
 .venv/
 
 # 4. Trọng số mô hình AI (Rất nặng, không nên push)
-*.pth
 *.pt
 
 # 5. Các file log, db cục bộ
