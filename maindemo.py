@@ -20,7 +20,7 @@ st.divider()
 
 MODEL_PATH = "best_model.pth"
 DB_PATH = "signature_database.pkl"  # File lưu trữ vector chữ ký mẫu
-THRESHOLD = 0.3158
+THRESHOLD = 0.3494
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Tự động tải/khởi tạo Database vĩnh viễn
